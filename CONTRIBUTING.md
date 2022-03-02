@@ -37,8 +37,11 @@ expertly configured environment.
 
 ## Set up a development environment
 
-**Note**: If you are going to debug Conjur using [RubyMine IDE](https://www.jetbrains.com/ruby/) or [Visual Studio Code IDE](https://code.visualstudio.com),
-see [RubyMine IDE Debugging](#rubymine-ide-debugging) or [Visual Studio Code IDE debugging](#visual-studio-code-ide-debugging) respectively before setting up the development environment.
+For developers, it is easy-to-use development environment, so that they can work on the collection, roles, plugins, and playbooks without needing to run the test suite. The repo scripts is in dev/ to setup and teardown this environment.
+This docker-compose dev environment is really useful, including a few different services:
+-  A Conjur Open Source instance
+-  An Ansible control node
+-  Managed nodes to push tasks to
 
 The `dev` directory contains a `docker-compose` file which creates a development
 environment with a database container (`pg`, short for *postgres*), and a
