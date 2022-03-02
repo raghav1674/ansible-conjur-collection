@@ -113,7 +113,7 @@ To use it:
 - Install "ca-certificates" ,in case of any issue it retries 10 times on every 2 seconds of delay
 - Place Conjur public SSL certificate
 - Symlink Conjur public SSL certificate into /etc/ssl/certs
-- Install openssl-perl Package when ansible_os_family is ‘RedHat’, in case of any issue it retries 10 times on every 2 seconds of delay
+- Install openssl-perl Package when ansible_os_family is 'RedHat', in case of any issue it retries 10 times on every 2 seconds of delay
 - copy files from the Ansible to the hosts  into /etc/Conjur.conf
 - Request identity from Conjur
 - Place identity file /etc/Conjur.identity when not Conjurized .
