@@ -1,5 +1,5 @@
 # Contributing to the Ansible Conjur Collection
-Thanks for your interest in Conjur. Before contributing, please take a moment to
+Thanks for your interest in Conjur Collection . Before contributing, please take a moment to
 read and sign our <a href="https://github.com/cyberark/community/blob/master/documents/CyberArk_Open_Source_Contributor_Agreement.pdf" download="conjur_contributor_agreement">Contributor Agreement</a>.
 This provides patent protection for all Conjur users and allows CyberArk to enforce
 its license terms. Please email a signed copy to <a href="oss@cyberark.com">oss@cyberark.com</a>.
@@ -19,20 +19,21 @@ For general contribution and community guidelines, please see the [community rep
 
  ## Prerequisites
 
-Before getting started, you should install some developer tools. These are not
-required to deploy Conjur but they will let you develop using a standardized,
-expertly configured environment.
+To start developing and testing using our development scripts ,
+the following tools need to be installed:
 
-1. [git][get-git] to manage source code
+1. [Git][get-git] to manage source code
 2. [Docker][get-docker] to manage dependencies and runtime environments
 3. [Docker Compose][get-docker-compose] to orchestrate Docker environments
-4. [Ruby version 3 or higher installed][install-ruby-3] - native installation or using [RVM][install-rvm].
+4. [Ruby][install-ruby] - native installation 
+5. [Python][Python] - for lookup plug-in
+
 
 [get-docker]: https://docs.docker.com/engine/installation
-[get-git]: https://git-scm.com/downloads
 [get-docker-compose]: https://docs.docker.com/compose/install
-[install-ruby-3]: https://www.ruby-lang.org/en/documentation/installation/
-[install-rvm]: https://rvm.io/rvm/install
+[get-git]: https://git-scm.com/downloads
+[install-ruby]: https://www.ruby-lang.org/en/documentation/installation/
+[Python]: https://packaging.python.org/en/latest/tutorials/installing-packages/
 
 
 ## Set up a development environment
