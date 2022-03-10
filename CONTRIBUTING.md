@@ -30,7 +30,7 @@ the following tools need to be installed:
 [get-docker-compose]: https://docs.docker.com/compose/install
 [get-git]: https://git-scm.com/downloads
 
-## Set up a development environment
+# Set up a development environment
 
 The `dev` directory contains a `docker-compose` file which creates a development
 environment : 
@@ -53,8 +53,8 @@ To use it:
    ansibleplugingtestingconjurhostidentity-test_app_centos-2 : ok=17 ...
    ansibleplugingtestingconjurhostidentity-test_app_ubuntu-1 : ok=16 ...
    ansibleplugingtestingconjurhostidentity-test_app_ubuntu-2 : ok=16 ...
-   $
-   \``
+   
+   ```
 
    Once the `start` script finishes, you're in a Bash shell inside the Conjur
    server container.  To
@@ -70,18 +70,14 @@ To use it:
 - Use .j2 template to generate inventory prepended with COMPOSE_PROJECT_NAME
 - Deploy Conjur Lookup Plugin for Ansible
 - Prepare and run Conjur Policy as [root.yml](#conjur-policy-example)
-     ```sh
-     docker exec conjur_client conjur policy load root /policy/root.yml
-    ```
+  ```sh
+   docker exec conjur_client conjur policy load root /policy/root.yml
+  ```
 - Centralise the secrets
 
 ## Setup Conjur identity on managed host
 
-- [Check Conjur identity](#check-conjur-identity)
-- [Set up Conjur identity](#set-up-conjur-identity)
-- [Set up Summon-Conjur](#set-up-summon-conjur)
-
-## Check Conjur identity
+### Check Conjur identity
 
 - Set variable "Conjurized", if /etc/Conjur.identity already exists
 - Ensure all required variables are set-
@@ -98,7 +94,7 @@ To use it:
     - Conjur_validate_certs: no
 - Ensure "Conjur_host_factory_token" is set (if node is not already Conjurized)
 
-## Set up Conjur identity
+### Set up Conjur identity
 
 - Install "ca-certificates" ,in case of any issue it retries 10 times on every 2 seconds of delay
 - Place Conjur public SSL certificate
@@ -108,13 +104,13 @@ To use it:
 - Request identity from Conjur
 - Place identity file /etc/Conjur.identity when not Conjurized .
 
-## Set up Summon-Conjur
+### Set up Summon-Conjur
 
 - Download and unpack Summon
 - Create folder for Summon-Conjur to be installed into
 - Download and unpack Summon-Conjur
 
-## Conjur Policy example
+### Conjur Policy example
 
 ```sh
 - !policy
@@ -150,7 +146,7 @@ To use it:
     resources: [ !variable target-password ]
 ```
 
-## Useful links
+### Useful links
 
 - [Official documentation for Conjur's Ansible integration](https://docs.conjur.org/Latest/en/Content/Integrations/ansible.html)
 - [Conjur Collection on Ansible Galaxy](https://galaxy.ansible.com/cyberark/conjur)
