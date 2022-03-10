@@ -1,5 +1,5 @@
 # Contributing to the Ansible Conjur Collection
-Thanks for your interest in Conjur Collection . Before contributing, please take a moment to
+Thanks for your interest in Conjur. Before contributing, please take a moment to
 read and sign our <a href="https://github.com/cyberark/community/blob/master/documents/CyberArk_Open_Source_Contributor_Agreement.pdf" download="conjur_contributor_agreement">Contributor Agreement</a>.
 This provides patent protection for all Conjur users and allows CyberArk to enforce
 its license terms. Please email a signed copy to <a href="oss@cyberark.com">oss@cyberark.com</a>.
@@ -25,29 +25,18 @@ the following tools need to be installed:
 1. [Git][get-git] to manage source code
 2. [Docker][get-docker] to manage dependencies and runtime environments
 3. [Docker Compose][get-docker-compose] to orchestrate Docker environments
-4. [Ruby][install-ruby] - native installation 
-5. [Python][Python] - for lookup plug-in
-
 
 [get-docker]: https://docs.docker.com/engine/installation
 [get-docker-compose]: https://docs.docker.com/compose/install
 [get-git]: https://git-scm.com/downloads
-[install-ruby]: https://www.ruby-lang.org/en/documentation/installation/
-[Python]: https://packaging.python.org/en/latest/tutorials/installing-packages/
-
 
 ## Set up a development environment
 
-For developers, it is easy-to-use development environment, so that they can work on the collection, roles, plugins, and playbooks without needing to run the test suite. The repo scripts is in dev/ to setup and teardown this environment.
-This docker-compose dev environment is really useful, including a few different services:
+The `dev` directory contains a `docker-compose` file which creates a development
+environment : 
 -  A Conjur Open Source instance
 -  An Ansible control node
 -  Managed nodes to push tasks to
-
-The `dev` directory contains a `docker-compose` file which creates a development
-environment with a database container (`pg`, short for *postgres*), and a
-`conjur` server container with source code mounted into the directory
-`/cyberark/dev/`.
 
 To use it:
 
@@ -59,8 +48,13 @@ To use it:
    $ cd dev
    $ ./start.sh
    ...
-   root@f75015718049:/cyberark/dev/#
-   ```
+   PLAY RECAP *********************************************************************
+   ansibleplugingtestingconjurhostidentity-test_app_centos-1 : ok=17 ...
+   ansibleplugingtestingconjurhostidentity-test_app_centos-2 : ok=17 ...
+   ansibleplugingtestingconjurhostidentity-test_app_ubuntu-1 : ok=16 ...
+   ansibleplugingtestingconjurhostidentity-test_app_ubuntu-2 : ok=16 ...
+   $
+   \``
 
    Once the `start` script finishes, you're in a Bash shell inside the Conjur
    server container.  To
@@ -68,15 +62,7 @@ To use it:
    After starting Conjur, your instance will be configured with the following:
    * Account: `cucumber`
    * User: `admin`
-   * Password: Run `cat conjur.identity` inside the container shell to display the current logged-in identity (which is also the password)
-
-1. Debug the server
-
-   ```sh-session
-   root@f39015718062:docker-compose exec <container-service-name> bash
-   <various startup messages, then finally:>
-   Use exit to stop
-   ```
+   * Password: Run `conjurctl role retrieve-key cucumber:user:admin` inside the Conjur container shell to retrieve the admin user API key (which is also the  password)
 
 ## Setup a Conjur OSS Environment
 
@@ -166,13 +152,9 @@ To use it:
 
 ## Useful links
 
-| Source  | URLs |
-| ------ | ------ |
-| CyberArk Conjur |https://docs.conjur.org/Latest/en/Content/Integrations/ansible.html|
-| GitHub | https://github.com/cyberark/ansible-conjur-collection|
-| Ansible Galaxy | https://galaxy.ansible.com/cyberark/conjur_collection|
-| Ansible Doc| https://docs.ansible.com/ansible/latest/collections/cyberark/conjur/index.html|
-
+- [Official documentation for Conjur's Ansible integration](https://docs.conjur.org/Latest/en/Content/Integrations/ansible.html)
+- [Conjur Collection on Ansible Galaxy](https://galaxy.ansible.com/cyberark/conjur)
+- [Ansible documentation for the Conjur collection](https://docs.ansible.com/ansible/latest/collections/cyberark/conjur/index.html)
 
 ## Testing
 
