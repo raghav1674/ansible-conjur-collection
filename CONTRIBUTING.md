@@ -42,11 +42,20 @@ To use it:
 
 1. Install dependencies (as above)
 
-1. Start the container (and optional extensions):
+1. To setup the dev environment ,first need to Clone GitHub [conjur-collection-quickstart](https://github.com/cyberark/ansible-conjur-collection) repository in your directory and then run start.sh script 
+    
 
+ ```sh-session
+ $ git clone https://github.com/cyberark/ansible-conjur-collection.git
+ $ cd dev
+ $ ./start.sh
+
+ ```
+### Verification
+
+  When start.sh script successfully setup Conjur environment along with inventory machines , the terminal returns the following:
+        
    ```sh-session
-   $ cd dev
-   $ ./start.sh
    ...
    PLAY RECAP *********************************************************************
    ansibleplugingtestingconjurhostidentity-test_app_centos-1 : ok=17 ...
@@ -55,9 +64,6 @@ To use it:
    ansibleplugingtestingconjurhostidentity-test_app_ubuntu-2 : ok=16 ...
    
    ```
-
-   Once the `start` script finishes, you're in a Bash shell inside the Conjur
-   server container.  To
 
    After starting Conjur, your instance will be configured with the following:
    * Account: `cucumber`
