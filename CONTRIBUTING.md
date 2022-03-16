@@ -13,6 +13,7 @@ For general contribution and community guidelines, please see the [community rep
           - [Check Conjur identity](#check-conjur-identity)
           - [Set up Conjur identity](#set-up-conjur-identity)
           - [Set up Summon-Conjur](#set-up-summon-conjur)
+      + [Troubleshooting](#troubleshooting)
    - [Testing](#testing)
    - [Releasing](#releasing)
 
@@ -151,6 +152,65 @@ To use it:
     privileges: [ execute ]
     resources: [ !variable target-password ]
 ```
+
+## Troubleshooting
+
+### `Failed to open TCP connection` error for Conjur login
+
+If you are
+[using persistent Conjur configuration](#using-persistent-conjur-configuration),
+and you see the following error when trying to log into Conjur:
+
+```
+error: Failed to open TCP connection to conjur:80 (Connection refused - connect(2) for "conjur" port 80)
+```
+
+Then try the following:
+
+1. Run the following command:
+
+   ```
+   docker-compose logs conjur | grep "already running"
+   ```
+
+1. If the command in Step 1 produces the following line:
+
+   ```
+   A server is already running. Check /opt/conjur-server/tmp/pids/server.pid.
+   ```
+
+   then it may be that the Conjur container was stopped (e.g.
+   `docker-compose stop conjur`) and restarted
+   (`docker-compose up -d conjur`)
+   without being brought fully down (e.g. with `docker-compose down conjur`),
+   leaving the container with stale connection state.
+
+   To recover from this, run:
+
+   ```
+   docker-compose down conjur
+   docker-compose up -d conjur
+   ```
+
+   And log in again, e.g.:
+
+   ```
+   docker-compose exec client conjur authn login -u admin
+   ```
+
+1. If "A server is already running" does not show in the Conjur container
+   logs, or Step 2 above is unsuccessful, then try restarting all containers:
+
+   ```
+   docker-compose down
+   docker-compose up -d
+   ```
+
+   and try logging in again, e.g.:
+
+   ```
+   docker-compose exec client conjur authn login -u admin
+   ```
 
 ### Useful links
 
