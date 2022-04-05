@@ -1,4 +1,5 @@
 # Contributing to the Ansible Conjur Collection
+
 Thanks for your interest in Conjur. Before contributing, please take a moment to
 read and sign our <a href="https://github.com/cyberark/community/blob/master/documents/CyberArk_Open_Source_Contributor_Agreement.pdf" download="conjur_contributor_agreement">Contributor Agreement</a>.
 This provides patent protection for all Conjur users and allows CyberArk to enforce
@@ -69,88 +70,6 @@ To use it:
    * Account: `cucumber`
    * User: `admin`
    * Password: Run `conjurctl role retrieve-key cucumber:user:admin` inside the Conjur container shell to retrieve the admin user API key (which is also the  password)
-
-## Setup a Conjur OSS Environment
-
-- Build, create, and start containers for OSS Conjur service
-- Use .j2 template to generate inventory prepended with COMPOSE_PROJECT_NAME
-- Deploy Conjur Lookup Plugin for Ansible
-- Prepare and run Conjur Policy as [root.yml](#conjur-policy-example)
-  ```sh
-   docker exec conjur_client conjur policy load root /policy/root.yml
-  ```
-- Centralise the secrets
-
-## Setup Conjur identity on managed host
-
-### Check Conjur identity
-
-- Set variable "Conjurized", if /etc/Conjur.identity already exists
-- Ensure all required variables are set-
-    - Conjur_account
-    - Conjur_appliance_url
-    - Conjur_host_name
-- Set variable "ssl_configuration"
-- Ensure all required ssl variables are set-
-    - Conjur_ssl_certificate
-    - Conjur_validate_certs
- - Set variable "ssl file path" at a path like "/etc/Conjur.pem"
- - Set variable when non ssl configuration
-    - Conjur_ssl_certificate_path: ""
-    - Conjur_validate_certs: no
-- Ensure "Conjur_host_factory_token" is set (if node is not already Conjurized)
-
-### Set up Conjur identity
-
-- Install "ca-certificates" ,in case of any issue it retries 10 times on every 2 seconds of delay
-- Place Conjur public SSL certificate
-- Symlink Conjur public SSL certificate into /etc/ssl/certs
-- Install openssl-perl Package when ansible_os_family is 'RedHat', in case of any issue it retries 10 times on every 2 seconds of delay
-- copy files from the Ansible to the hosts  into /etc/Conjur.conf
-- Request identity from Conjur
-- Place identity file /etc/Conjur.identity when not Conjurized .
-
-### Set up Summon-Conjur
-
-- Download and unpack Summon
-- Create folder for Summon-Conjur to be installed into
-- Download and unpack Summon-Conjur
-
-### Conjur Policy example
-
-```sh
-- !policy
-  id: ansible
-  annotations:
-    description: Policy for Ansible master and remote hosts
-  body:
-
-  - !host
-    id: ansible-master
-    annotations:
-      description: Host for running Ansible on remote targets
-
-  - !layer &remote_hosts_layer
-    id: remote_hosts
-    annotations:
-      description: Layer for Ansible remote hosts
-
-  - !host-factory
-    id: ansible-factory
-    annotations:
-      description: Factory to create new hosts for ansible
-    layer: [ *remote_hosts_layer ]
-
-  - !variable
-    id: target-password
-    annotations:
-      description: Password needed by the Ansible remote machine
-
-  - !permit
-    role: *remote_hosts_layer
-    privileges: [ execute ]
-    resources: [ !variable target-password ]
-```
 
 ### Useful links
 
