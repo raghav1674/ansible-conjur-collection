@@ -9,13 +9,14 @@ For general contribution and community guidelines, please see the [community rep
 - [Contributing to the Ansible Conjur Collection](#contributing-to-the-ansible-conjur-collection)
   - [Prerequisites](#prerequisites)
   - [Set up a development environment](#set-up-a-development-environment)
-      1. Set up Conjur Open Source and Ansible control node
-      2. Load policy to set up Conjur Ansible integration
-      3. Create Ansible managed nodes
-      4. Use `conjur_host_identity` to set up Conjur identity on managed nodes
-      5. Use `conjur_variable` lookup plugin to provide secrets to Ansible Playbooks
-   - [Testing](#testing)
-   - [Releasing](#releasing)
+  - [Testing](#testing)
+  - [Releasing](#releasing)
+- [Ansible Conjur Collection Quick Start](#Ansible-Conjur-Collection-Quick-Start)(#testing)
+    1. [Set up Conjur Open Source and Ansible control node](#testing)
+    2. [Load policy to set up Conjur Ansible integration](#testing)
+    3. [Create Ansible managed nodes](#testing)
+    4. [Use `conjur_host_identity` to set up Conjur identity on managed nodes](#testing)
+    5. [Use `conjur_variable` lookup plugin to provide secrets to Ansible Playbooks](#testing)
 
 
  ## Prerequisites
