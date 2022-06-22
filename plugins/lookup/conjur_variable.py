@@ -9,12 +9,11 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
                     'supported_by': 'community'}
 
 DOCUMENTATION = """
-    lookup: conjur_variable
-    version_added: "2.5"
+    name: conjur_variable
+    version_added: "1.0.2"
     short_description: Fetch credentials from CyberArk Conjur.
     author:
       - CyberArk BizDev (@cyberark-bizdev)
-      - CyberArk Community and Integrations Team (@cyberark/community-and-integrations-team)
     description:
       Retrieves credentials from Conjur using the controlling host's Conjur identity
       or environment variables.
@@ -269,6 +268,11 @@ def _store_secret_in_file(value):
 class LookupModule(LookupBase):
 
     def run(self, terms, variables=None, **kwargs):
+        if terms == []:
+            raise AnsibleError("Invalid secret path: no secret path provided.")
+        elif not terms[0] or terms[0].isspace():
+            raise AnsibleError("Invalid secret path: empty secret path not accepted.")
+
         self.set_options(direct=kwargs)
         validate_certs = self.get_option('validate_certs')
         conf_file = self.get_option('config_file')
